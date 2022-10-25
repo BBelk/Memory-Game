@@ -24,6 +24,16 @@ export const ADD_USER = gql`
   }
 `;
 
+export const REMOVE_USER = gql`
+  mutation removerUser($profileId: ID!) {
+    removerUser(profileId: $profileId) {
+      _id
+      username
+
+    }
+  }
+`;
+
 export const ADD_THOUGHT = gql`
   mutation addThought($thoughtText: String!) {
     addThought(thoughtText: $thoughtText) {
