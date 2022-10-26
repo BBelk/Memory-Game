@@ -12,8 +12,7 @@ function Navbar() {
   if (Auth.loggedIn()) {
     return (
       <>
-        <Link to="/me" className='
-        text-decoration-none'>
+        <Link to="/me">
           {Auth.getProfile().data.username}'s profile
         </Link>
         <button onClick={logout}>
@@ -25,10 +24,10 @@ function Navbar() {
   // If logged out show login controls
   return (
     <>
-      <Link to="/login">
+      <Link style={{textDecoration: 'none', color: 'black'}} to="/login">
         Login
       </Link>
-      <Link to="/signup">
+      <Link style={{textDecoration: 'none', color: 'black'}} to="/signup">
         Signup
       </Link>
     </>
