@@ -22,8 +22,8 @@ export default function Match2Game () {
         <div>
           {options === null ? (
             <>
-              <button onClick={() => setOptions(12)}>Easy</button>
-              <button onClick={() => setOptions(18)}>Medium</button>
+              <button onClick={() => setOptions(16)}>Easy</button>
+              <button onClick={() => setOptions(36)}>Medium</button>
               <button onClick={() => setOptions(24)}>Hard</button>
             </>
           ) : (
@@ -171,6 +171,15 @@ function MemoryGame({options, setOptions, highScore, setHighScore}) {
   if (game.length === 0) return <div>loading...</div>
   else {
     return (
+//       <div class="board" style="grid-template-columns: repeat(${dimensions}, auto)">
+//       ${items.map(item => `
+//           <div class="card">
+//               <div class="card-front"></div>
+//               <div class="card-back">${item}</div>
+//           </div>
+//       `).join('')}
+//  </div>
+  // <div class="board" style="grid-template-columns: repeat(${dimensions}, auto)"></div>
       <div id="cards">
         {game.map((card, index) => (
           <div className="card" key={index}>
@@ -198,6 +207,7 @@ function MemoryGame({options, setOptions, highScore, setHighScore}) {
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
+      
     }
     button {
       background: #00ad9f;
@@ -216,18 +226,31 @@ function MemoryGame({options, setOptions, highScore, setHighScore}) {
       outline: 0;
     }
     #cards {
-      width: 1060px;
+      // width: 1060px;
       margin: 0 auto;
       display: flex;
       flex-wrap: wrap;
+      // position:absolute;
+      display:grid;
+      grid-template-columns: repeat(${Math.sqrt(options)}, auto);
+  grid-auto-rows: minmax(100px, auto);
+  width: 50%;
+  grid-gap:5px;
+  // overflow: hidden;
     }
     .card {
-      width: 160px;
-      height: 160px;
-      margin-bottom: 20px;
+      // width: 160px;
+      // height: 160px;
+      // margin-bottom: 20px;
+      // position: relative;
+      // display:flex;
+    width: 1fr;
+    height: 1fr;
+    aspect-ratio: 1;
+    // cursor: pointer;
     }
     .card:not(:nth-child(6n)) {
-      margin-right: 20px;
+      // margin-right: 20px;
     }
 
     .c {
@@ -242,7 +265,14 @@ function MemoryGame({options, setOptions, highScore, setHighScore}) {
 
     .front,
     .back {
-      background-size: cover;
+      // background-size: cover;
+      position: absolute;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    background: #282A3A;
+    // transition: transform .6s cubic-bezier(0.4, 0.0, 0.2, 1);
+    // backface-visibility: hidden;
     }
 
     .back {
