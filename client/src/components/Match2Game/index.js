@@ -17,14 +17,14 @@ export default function Match2Game () {
   return (
     <div>
       <div className="container">
-        <h1>Memory Game</h1>
-        <div>High Score: {highScore}</div>
+        <h1>Memory Game<br/></h1>
+        <div>High Score: {highScore}<br/></div>
         <div>
           {options === null ? (
             <>
               <button onClick={() => setOptions(16)}>Easy</button>
               <button onClick={() => setOptions(36)}>Medium</button>
-              <button onClick={() => setOptions(24)}>Hard</button>
+              <button onClick={() => setOptions(64)}>Hard</button>
             </>
           ) : (
             <>
@@ -180,7 +180,8 @@ function MemoryGame({options, setOptions, highScore, setHighScore}) {
 //       `).join('')}
 //  </div>
   // <div class="board" style="grid-template-columns: repeat(${dimensions}, auto)"></div>
-      <div id="cards">
+  <div className="row m-5">
+      <div id="cards" className="col-md-3">
         {game.map((card, index) => (
           <div className="card" key={index}>
             <Card
@@ -195,13 +196,14 @@ function MemoryGame({options, setOptions, highScore, setHighScore}) {
           </div>
         ))}
         <style jsx global>
+          
   {`
     body {
       text-align: center;
       font-family: -apple-system, sans-serif;
     }
     .container {
-      width: 1060px;
+      // width: 1060px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
@@ -228,13 +230,15 @@ function MemoryGame({options, setOptions, highScore, setHighScore}) {
     #cards {
       // width: 1060px;
       margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
+      // display: flex;
+      // flex-wrap: wrap;
       // position:absolute;
       display:grid;
       grid-template-columns: repeat(${Math.sqrt(options)}, auto);
-  grid-auto-rows: minmax(100px, auto);
-  width: 50%;
+      // grid-template-columns: repeat(auto-fill, auto);
+  // grid-auto-rows: minmax(100px, auto);
+  // width: 25%;
+  // max-width: 50%;
   grid-gap:5px;
   // overflow: hidden;
     }
@@ -254,11 +258,11 @@ function MemoryGame({options, setOptions, highScore, setHighScore}) {
     }
 
     .c {
-      position: absolute;
-      max-width: 160px;
-      max-height: 160px;
-      width: 50ch;
-      height: 50ch;
+      // position: absolute;
+      // max-width: 160px;
+      // max-height: 160px;
+      // width: 50ch;
+      // height: 50ch;
       cursor: pointer;
       will-change: transform, opacity;
     }
@@ -284,6 +288,7 @@ function MemoryGame({options, setOptions, highScore, setHighScore}) {
     }
   `}
 </style>
+      </div>
       </div>
     )
   }
