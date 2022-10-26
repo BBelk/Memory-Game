@@ -12,7 +12,8 @@ function Navbar() {
   if (Auth.loggedIn()) {
     return (
       <>
-        <Link to="/me">
+        <Link to="/me" className='
+        text-decoration-none'>
           {Auth.getProfile().data.username}'s profile
         </Link>
         <button onClick={logout}>
