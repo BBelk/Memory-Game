@@ -24,10 +24,10 @@ function Navbar() {
   // If logged out show login controls
   return (
     <>
-      <Link style={{textDecoration: 'none', color: 'black'}} to="/login">
+      <Link style={{textDecoration: 'none', color: '#FAD6A5', marginRight: 13}} to="/login">
         Login
       </Link>
-      <Link style={{textDecoration: 'none', color: 'black'}} to="/signup">
+      <Link style={{textDecoration: 'none', color: '#FAD6A5'}} to="/signup">
         Signup
       </Link>
     </>
