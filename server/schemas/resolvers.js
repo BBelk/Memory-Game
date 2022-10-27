@@ -46,7 +46,19 @@ const resolvers = {
     },
     updateUser: async (parent, { profileId, username, email, password }) => {
       return await User.findByIdAndUpdate({ _id: profileId }, {$set: { username: username, email: email, password: password }}, { new: true });
-    }
+    },
+
+    addHighscore: async (parent, { profileId, newHighscore }) => {
+      return User.findOneAndUpdate(
+        { _id: profileId },
+        {
+          $addToSet: { highscores: newHighscore },
+        },
+        {
+          new: true,
+        }
+      );
+    },
   }
 };
 
