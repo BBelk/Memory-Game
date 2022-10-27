@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Images from "../../assets/images/back.png";
+// import Images from "../../assets/images";
+
 
 import { useSpring, animated as a } from "react-spring";
 
@@ -14,11 +15,12 @@ export default function Match2Game() {
       setHighScore(savedScore);
     }
   }, []);
-
+  // console.log("THIS IS A THING", loadImages[2]);
   return (
     <div>
       <div className="container">
         <h1>
+        {/* <img src={ loadImages[1].default } alt="idk" height="150" width="150"></img> */}
           Memory Game
           <br />
         </h1>
@@ -71,20 +73,30 @@ function MemoryGame({ options, setOptions, highScore, setHighScore }) {
   const [flippedCount, setFlippedCount] = useState(0);
   const [flippedIndexes, setFlippedIndexes] = useState([]);
 
-  const colors = [
-    "#ecdb54",
-    "#e34132",
-    "#6ca0dc",
-    "#944743",
-    "#dbb2d1",
-    "#ec9787",
-    "#00a68c",
-    "#645394",
-    "#6c4f3d",
-    "#ebe1df",
-    "#bc6ca7",
-    "#bfd833",
-  ];
+  function importAll(r) {
+    let images = [];
+  r.keys().map((item, index) => { images.push(r(item)); });
+    return images;
+   }
+   const loadImages = importAll(require.context('../../assets/images', false, /\.(png|jpe?g|svg)$/));
+   
+   const colors = Array.from({length: loadImages.length}, (_, i) => i + 1);
+   //=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+  // const colors = [
+  //   "#ecdb54",
+  //   "#e34132",
+  //   "#6ca0dc",
+  //   "#944743",
+  //   "#dbb2d1",
+  //   "#ec9787",
+  //   "#00a68c",
+  //   "#645394",
+  //   "#6c4f3d",
+  //   "#ebe1df",
+  //   "#bc6ca7",
+  //   "#bfd833",
+  // ];
 
   useEffect(() => {
     const newGame = [];
@@ -181,15 +193,7 @@ function MemoryGame({ options, setOptions, highScore, setHighScore }) {
   if (game.length === 0) return <div>loading...</div>;
   else {
     return (
-      //       <div class="board" style="grid-template-columns: repeat(${dimensions}, auto)">
-      //       ${items.map(item => `
-      //           <div class="card">
-      //               <div class="card-front"></div>
-      //               <div class="card-back">${item}</div>
-      //           </div>
-      //       `).join('')}
-      //  </div>
-      // <div class="board" style="grid-template-columns: repeat(${dimensions}, auto)"></div>
+      
       <div className="row m-5">
         <div id="cards" className="col-md-3">
           {game.map((card, index) => (
@@ -282,13 +286,15 @@ function MemoryGame({ options, setOptions, highScore, setHighScore }) {
                 border-radius: 5px;
                 width: 100%;
                 height: 100%;
+                margin:1px;
+                background-color:blue;
                 // background: #282A3A;
                 // transition: transform .6s cubic-bezier(0.4, 0.0, 0.2, 1);
                 // backface-visibility: hidden;
               }
 
               .back {
-                background-image: url("${Images}");
+                {/* background-image: url({loadImages[1].default}); */}
               }
 
               .front {
@@ -311,6 +317,12 @@ function Card({
   flippedIndexes,
   setFlippedIndexes,
 }) {
+  function importAll(r) {
+    let images = [];
+  r.keys().map((item, index) => { images.push(r(item)); });
+    return images;
+   }
+   const loadImages = importAll(require.context('../../assets/images', false, /\.(png|jpe?g|svg)$/));
   const [flipped, set] = useState(false);
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
@@ -358,6 +370,9 @@ function Card({
         style={{
           opacity: opacity.interpolate((o) => 1 - o),
           transform,
+          // backgroundImage: URL(
+            // backgroundImage: URL(${loadImages[1].default}),
+            backgroundImage: `url(${loadImages[0].default})`
         }}
       />
       <a.div
@@ -365,7 +380,8 @@ function Card({
         style={{
           opacity,
           transform: transform.interpolate((t) => `${t} rotateX(180deg)`),
-          background: color,
+          // backgroundColor: color,
+          backgroundImage: `url(${loadImages[color].default})`,
         }}
       />
     </div>
