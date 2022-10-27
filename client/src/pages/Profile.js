@@ -7,6 +7,7 @@ import Auth from '../utils/auth';
 import { QUERY_USERS, QUERY_USER, QUERY_ME } from '../utils/queries';
 // Components
 import UserList from '../components/UserList';
+import Highscores from '../components/Highscores';
 
 const Profile = () => {
   const { id } = useParams();
@@ -20,6 +21,7 @@ const Profile = () => {
   const { usersLoading, data: usersData } = useQuery(QUERY_USERS);
 
   const user = data?.me || data?.user || {};
+  console.log("HERE IS THE USER DATA: ", user);
   const users = usersData?.users || [];
 
   if (error) console.log(error);
@@ -67,6 +69,7 @@ const Profile = () => {
         </h2>
         {renderCurrentUserInfo()}
         {renderUserList()}
+        {user.highscores?.length > 0 && <Highscores highscores={user.highscores} />}
       </div>
     </div>
   );

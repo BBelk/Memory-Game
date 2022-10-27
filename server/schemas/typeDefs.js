@@ -6,6 +6,7 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
+    highscores: [String]
   }
 
   type Auth {
@@ -24,6 +25,7 @@ const typeDefs = gql`
     login(email:String!, password:String!): Auth
     removeUser(profileId: ID!): User
     updateUser(profileId: ID!, username: String! email: String!, password: String!): User
+    addHighscore(profileId: ID!, newHighscore: String): User
   }
 `;
 

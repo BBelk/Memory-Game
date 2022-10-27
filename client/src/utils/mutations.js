@@ -34,6 +34,16 @@ export const REMOVE_USER = gql`
   }
 `;
 
+export const ADD_HIGHSCORE = gql`
+  mutation addHighscore($profileId: ID!, $newHighScore: STRING ) {
+    addHighScore(profileId: $profileId, newHighscore: $newHighscore) {
+      _id
+      newHighscore
+
+    }
+  }
+`;
+
 export const ADD_THOUGHT = gql`
   mutation addThought($thoughtText: String!) {
     addThought(thoughtText: $thoughtText) {
