@@ -15,13 +15,10 @@ const Header = () => {
           </button>
           <div className="collapse navbar-collapse " id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto list-unstyled me-5">
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a className="nav-link active" style={{ color: "#FAD6A5", fontSize: 25, borderRight: "1px solid #F0EBCE"}} aria-current="page" href="#">User's Profile</a>
-              </li>
-              {/* <li> | </li> */}
-              <li className="nav-item">
-                <a className="nav-link" style={{ color: "#FAD6A5", fontSize: 25, borderRight: "1px solid #F0EBCE"}} href="#">High Scores</a>
-              </li>
+              </li> */}
+              
               <li className="nav-item">
                 <a className="nav-link" style={{ fontSize: 25 }} href="#" ><Navbar /></a>
               </li>
