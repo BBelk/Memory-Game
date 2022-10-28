@@ -5,6 +5,7 @@ import {
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
+import StoreProvider from './utils/store';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -15,6 +16,7 @@ import Profile from './pages/Profile';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Match2Game from './components/Match2Game';
+import Store from './utils/store';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -43,20 +45,22 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/me" element={<Profile />} />
-            <Route path="/users/:id" element={<Profile />} />
-          </Routes>
-          <Match2Game />
-          <Footer />
-        </>
-      </Router>
+      <StoreProvider>
+        <Router>
+          <>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/me" element={<Profile />} />
+              <Route path="/users/:id" element={<Profile />} />
+            </Routes>
+            <Match2Game />
+            <Footer />
+          </>
+        </Router>
+      </StoreProvider>
     </ApolloProvider>
   );
 }
