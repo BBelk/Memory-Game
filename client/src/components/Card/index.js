@@ -11,6 +11,22 @@ function Card({
   flippedIndexes,
   setFlippedIndexes,
 }) {
+
+  
+  const backgroundColors = [
+    "#e8cefc",
+    "#fcd1ce",
+    "#e2fcce",
+    "#cef9fc",
+    "#fce8cf",
+    "#cffcd2",
+    "#fccff9",
+    "#cfe3fc"
+  ];
+let myColorIndex = color;
+  while(myColorIndex > 7){
+    myColorIndex -= 8;
+  }
   const [flipped, setFlipped] = useState(false);
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
@@ -73,7 +89,7 @@ function Card({
           style={{
             opacity,
             transform: transform.interpolate((t) => `${t} rotateX(180deg)`),
-            // backgroundColor: color,
+            backgroundColor: backgroundColors[myColorIndex],
             backgroundImage: `url(${loadImages[color].default})`,
           }}
         />
