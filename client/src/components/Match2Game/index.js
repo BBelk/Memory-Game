@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import MemoryGame from "../MemoryGame";
+import { useGameStore } from "../../utils/store";
+import { SET_HIGH_SCORE, SET_OPTIONS } from "../../utils/actions";
 
 export default function Match2Game() {
-  const [options, setOptions] = useState(null);
-  const [highScore, setHighScore] = useState(0);
+  const [state, dispatch] = useGameStore();
 
   useEffect(() => {
     const json = localStorage.getItem("memorygamehighscore");
     const savedScore = JSON.parse(json);
     if (savedScore) {
-      setHighScore(savedScore);
+      dispatch({type: SET_HIGH_SCORE, payload: savedScore});
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
@@ -21,42 +22,38 @@ export default function Match2Game() {
           <br />
         </h1>
         <div>
-          High Score: {highScore}
+          High Score: {state.highScore}
           <br />
         </div>
         <div>
-          {options === null ? (
+          {state.options === null ? (
             <>
-              <button onClick={() => setOptions(16)}>Easy</button>
-              <button onClick={() => setOptions(36)}>Medium</button>
-              <button onClick={() => setOptions(64)}>Hard</button>
+              <button onClick={() => dispatch({type: SET_OPTIONS, payload:16})}>Easy</button>
+              <button onClick={() => dispatch({type: SET_OPTIONS, payload:36})}>Medium</button>
+              <button onClick={() => dispatch({type: SET_OPTIONS, payload:64})}>Hard</button>
             </>
           ) : (
             <>
               <button
                 onClick={() => {
-                  const prevOptions = options;
-                  setOptions(null);
-                  setTimeout(() => {
-                    setOptions(prevOptions);
-                  }, 5);
+                  const prevOptions = state.options;
+                  //dispatch({type: SET_OPTIONS, payload: null});
+                  dispatch({type:SET_OPTIONS, payload: prevOptions});
+                  // setTimeout(() => {
+                    
+                  // }, 5);
                 }}
               >
                 Start Over
               </button>
-              <button onClick={() => setOptions(null)}>Main Menu</button>
+              <button onClick={() => dispatch({type: SET_OPTIONS, payload:null})}>Main Menu</button>
             </>
           )}
         </div>
       </div>
 
-      {options ? (
-        <MemoryGame
-          options={options}
-          setOptions={setOptions}
-          highScore={highScore}
-          setHighScore={setHighScore}
-        />
+      {state.options ? (
+        <MemoryGame/>
       ) : (
         <h2>Choose a difficulty to begin!</h2>
       )}

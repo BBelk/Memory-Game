@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import StyledCard from "./StyledCard";
 import { useSpring, animated as a } from "react-spring";
+import { useGameStore } from "../../utils/store";
+import { FLIP_CARD, INCREMENT_MOVE_COUNT, UPDATE_INDEXES } from "../../utils/actions";
 
 function Card({
   id,
   color,
-  game,
-  flippedCount,
-  setFlippedCount,
-  flippedIndexes,
-  setFlippedIndexes,
 }) {
 
+  const [state, dispatch] = useGameStore();
   
   const backgroundColors = [
     "#e8cefc",
@@ -27,25 +25,26 @@ let myColorIndex = color;
   while(myColorIndex > 7){
     myColorIndex -= 8;
   }
-  const [flipped, setFlipped] = useState(false);
+
   const { transform, opacity } = useSpring({
-    opacity: flipped ? 1 : 0,
-    transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
+    opacity: state.game[id].flipped ? 1 : 0,
+    transform: `perspective(600px) rotateX(${state.game[id].flipped ? 180 : 0}deg)`,
     config: { mass: 5, tension: 500, friction: 80 },
   });
 
   useEffect(() => {
-    if (flippedIndexes[2] === true && flippedIndexes.indexOf(id) > -1) {
+    if (state.flippedIndexes[2] === true && state.flippedIndexes.indexOf(id) > -1) {
       setTimeout(() => {
-        setFlipped((state) => !state);
-        setFlippedCount(flippedCount + 1);
-        setFlippedIndexes([]);
+        dispatch({type: FLIP_CARD, payload: { id, color }});
+        dispatch({type: INCREMENT_MOVE_COUNT, payload: id });
+        dispatch({type: UPDATE_INDEXES, payload: []});
+        
       }, 1000);
-    } else if (flippedIndexes[2] === false && id === 0) {
-      setFlippedCount((flippedCount) => flippedCount + 1);
-      setFlippedIndexes([]);
+    } else if (state.flippedIndexes[2] === false && id === 0) {
+      dispatch({type: UPDATE_INDEXES, payload: []});
+      dispatch({type: INCREMENT_MOVE_COUNT});
     }
-  }, [id, flippedIndexes, setFlipped, setFlippedCount, setFlippedIndexes]);
+  }, [id, color, dispatch, state.flippedIndexes]);
 
   const importAll = (r) => r.keys().map((item) => r(item));
 
@@ -54,22 +53,22 @@ let myColorIndex = color;
   );
 
   const onCardClick = () => {
-    if (!game[id].flipped && flippedCount % 3 === 0) {
+    if (!state.game[id].flipped && state.moveCount % 3 === 0) {
       // If it's not flipped and fippedCount is evenly divisible by 3 Got a match and another turn to come up
-      setFlipped((state) => !state);
-      setFlippedCount((flippedCount) => flippedCount + 1);
-      const newIndexes = [...flippedIndexes, id];
-      setFlippedIndexes(newIndexes);
+      dispatch({type: FLIP_CARD, payload: {id, color}});
+      dispatch({ type: INCREMENT_MOVE_COUNT });
+      const newIndexes = [...state.flippedIndexes, id];
+      dispatch({type: UPDATE_INDEXES , payload: newIndexes});
     } else if (
-      !game[id].flipped &&
-      flippedCount % 3 === 1 &&
-      flippedIndexes.indexOf(id) < 0
+      !state.game[id].flipped &&
+      state.moveCount % 3 === 1 &&
+      state.flippedIndexes.indexOf(id) < 0
     ) {
       // If you don't get a match
-      setFlipped((state) => !state);
-      setFlippedCount((flippedCount) => flippedCount + 1);
-      const newIndexes = [...flippedIndexes, id];
-      setFlippedIndexes(newIndexes);
+      dispatch({type: FLIP_CARD, payload: {id, color}});
+      dispatch({ type: INCREMENT_MOVE_COUNT });
+      const newIndexes = [...state.flippedIndexes, id];
+      dispatch({type: UPDATE_INDEXES,payload: newIndexes});
     }
   };
 
