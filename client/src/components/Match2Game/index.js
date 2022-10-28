@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import MemoryGame from "../MemoryGame";
 import { useGameStore } from "../../utils/store";
-import { SET_HIGH_SCORE, SET_OPTIONS } from "../../utils/actions";
+import { CREATE_GAME, SET_HIGH_SCORE, SET_OPTIONS } from "../../utils/actions";
 
 export default function Match2Game() {
   const [state, dispatch] = useGameStore();
@@ -36,9 +36,9 @@ export default function Match2Game() {
             <>
               <button
                 onClick={() => {
-                  const prevOptions = state.options;
-                  dispatch({type: SET_OPTIONS, payload: null});
-                  dispatch({type:SET_OPTIONS, payload: prevOptions});
+                  // const prevOptions = state.options;
+                  dispatch({type: CREATE_GAME});
+                  // dispatch({type:SET_OPTIONS, payload: prevOptions});
                   // setTimeout(() => {
                     
                   // }, 5);
