@@ -3,3 +3,7 @@ html, * {
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  background-color: #FFFAE7/*#FFF5E4;#FFCF8E8  */
+}
