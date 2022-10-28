@@ -37,7 +37,7 @@ export default function Match2Game() {
               <button
                 onClick={() => {
                   const prevOptions = state.options;
-                  //dispatch({type: SET_OPTIONS, payload: null});
+                  dispatch({type: SET_OPTIONS, payload: null});
                   dispatch({type:SET_OPTIONS, payload: prevOptions});
                   // setTimeout(() => {
                     
