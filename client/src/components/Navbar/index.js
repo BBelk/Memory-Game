@@ -25,9 +25,9 @@ function Navbar() {
   return (
     <>
       <Link style={{textDecoration: 'none', color: '#FAD6A5'}} to="/login">
-        Login~
+        Login |
       </Link>
-      <Link style={{textDecoration: 'none', color: '#FAD6A5'}} to="/signup">
+      <Link style={{textDecoration: 'none', color: '#FAD6A5', marginLeft: 5}} to="/signup">
         Signup
       </Link>
     </>
