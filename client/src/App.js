@@ -56,7 +56,7 @@ function App() {
               <Route path="/me" element={<Profile />} />
               <Route path="/users/:id" element={<Profile />} />
             </Routes>
-            <Match2Game />
+            
             <Footer />
           </>
         </Router>

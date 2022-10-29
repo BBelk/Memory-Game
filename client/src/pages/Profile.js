@@ -81,7 +81,7 @@ const Profile = () => {
           Viewing {id ? `${user.username}'s` : 'your'} profile.
         </h2>
         {renderCurrentUserInfo()}
-        {renderUserList()}
+        {/* {renderUserList()} */}
         {user.highscores?.length > 0 && <Highscores highscores={user.highscores} />}
       </div>
     </div>
