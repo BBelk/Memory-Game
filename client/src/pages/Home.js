@@ -6,6 +6,7 @@ import Auth from '../utils/auth';
 import { QUERY_USERS } from '../utils/queries';
 // Components
 import UserList from '../components/UserList';
+import Match2Game from '../components/Match2Game';
 
 const Home = () => {
   const { loading, data } = useQuery(QUERY_USERS);
@@ -15,7 +16,8 @@ const Home = () => {
     if (loading) {
       return <h2>Loading...</h2>
     } else {
-      return <UserList users={users} title="List of Users" />
+      // return <UserList users={users} title="List of Users" />
+      return <Match2Game />
     }
   } 
 
