@@ -9,3 +9,46 @@ body {
   padding-bottom: 70px;
   /* margin-bottom: 123px; */
 }
+
+body {
+  text-align: center;
+  font-family: -apple-system, sans-serif;
+}
+.container {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+button {
+  background: #00ad9f;
+  border-radius: 4px;
+  font-weight: 700;
+  color: #fff;
+  border: none;
+  padding: 7px 15px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+button:hover {
+  background: #008378;
+}
+button:focus {
+  outline: 0;
+}
+/* #cards {
+  // width: 1060px;
+  margin: 0 auto;
+  // display: flex;
+  // flex-wrap: wrap;
+  // position:absolute;
+  display: grid;
+  grid-template-columns: repeat(${Math.sqrt(state.options)}, auto);
+  // grid-template-columns: repeat(auto-fill, auto);
+  // grid-auto-rows: minmax(100px, auto);
+  // width: 25%;
+  // max-width: 50%;
+  grid-gap: 5px;
+  // overflow: hidden;
+} */

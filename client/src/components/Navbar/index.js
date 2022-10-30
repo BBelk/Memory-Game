@@ -12,24 +12,32 @@ function Navbar() {
   if (Auth.loggedIn()) {
     return (
       <>
-        <Link to="/me">
-          {Auth.getProfile().data.username}'s profile
-        </Link>
-        <button onClick={logout}>
-          Logout
-        </button>
+        <li className="nav-item">
+          <Link className="nav-link" style={{ fontSize: 25, textDecoration: 'none', color: '#FAD6A5'}} to="/me">
+            {Auth.getProfile().data.username}'s Profile
+          </Link>
+        </li>
+        <li className="nav-item">
+          <button className="nav-link" style={{ fontSize: 25, textDecoration: 'none', color: '#FAD6A5'}} onClick={logout}>
+            Logout
+          </button>
+        </li>
       </>
     );
   }
   // If logged out show login controls
   return (
     <>
-      <Link style={{textDecoration: 'none', color: '#FAD6A5'}} to="/login">
-        Login |
-      </Link>
-      <Link style={{textDecoration: 'none', color: '#FAD6A5', marginLeft: 5}} to="/signup">
-        Signup
-      </Link>
+      <li className="nav-item">
+        <Link className="nav-link" style={{fontSize: 25,textDecoration: 'none', color: '#FAD6A5'}} to="/login">
+          Login
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link" style={{fontSize: 25,textDecoration: 'none', color: '#FAD6A5'}} to="/signup">
+          Signup
+        </Link>
+      </li>
     </>
   )
 }
