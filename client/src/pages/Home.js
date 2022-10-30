@@ -23,6 +23,7 @@ const Home = () => {
 
   const renderUsername = () => {
     if (!Auth.loggedIn()) return null;
+    // console.log("USER STUFF HERE ", Auth.getProfile().data);
     return Auth.getProfile().data.username;
   }
 
@@ -30,6 +31,7 @@ const Home = () => {
     <main>
       <div>
         {renderUsername()}
+         <p>{Auth.getProfile().data._id}</p>
       </div>
       <div>
         {renderUserList()}
