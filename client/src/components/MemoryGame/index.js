@@ -38,16 +38,16 @@ import { ADD_HIGHSCORE } from '../../utils/mutations';
       dispatch({type: COMPLETE_GAME})
       // setTimeout(() => {
         
-        console.log("ATTEMPTED TO ADD HIGHSCORE, ID: " + Auth.getProfile().data._id + " SCORE: " + state.highScore);
+        console.log("ATTEMPTED TO ADD HIGHSCORE, ID: " + Auth.getProfile().data._id + " SCORE: " + state.score);
         
       DoHighscore();
       // }, 500);
     }
-  }, [dispatch, state.game, state.options, state.moveCount, state.highScore]);
+  }, [dispatch, state.game, state.options, state.moveCount, state.highScore, state.score]);
 
   const DoHighscore = async() => {
     try {
-      let scoreString = "" + state.highScore;
+      let scoreString = "" + state.score;
       const { data } = await addHighscore({
         variables: { profileId: Auth.getProfile().data._id,
           newHighscore: scoreString},

@@ -12,6 +12,7 @@ export default function StoreProvider(props) {
     moveCount: 0,
     flippedIndexes: [],
     highScore: 0,
+    score: 0,
     options: null,
     lastItemMoved: -1
   });
