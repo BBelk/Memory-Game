@@ -73,7 +73,7 @@ import { ADD_HIGHSCORE } from '../../utils/mutations';
           ))}
           <style jsx global>
             {`
-              body {
+              {/* body {
                 text-align: center;
                 font-family: -apple-system, sans-serif;
               }
@@ -100,7 +100,7 @@ import { ADD_HIGHSCORE } from '../../utils/mutations';
               }
               button:focus {
                 outline: 0;
-              }
+              } */}
               #cards {
                 // width: 1060px;
                 margin: 0 auto;
