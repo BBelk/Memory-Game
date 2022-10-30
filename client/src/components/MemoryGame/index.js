@@ -3,8 +3,22 @@ import { useEffect } from "react";
 import Card from "../Card";
 import { useGameStore } from "../../utils/store";
 import { COMPLETE_GAME, CREATE_GAME, VERIFY_MATCH } from "../../utils/actions";
+import Auth from '../../utils/auth';
+import { useMutation } from '@apollo/client';
+import { ADD_HIGHSCORE } from '../../utils/mutations';
 
-function MemoryGame() {
+// const AddToHighScore = async (newScore) => {
+  //       // add score
+  //       console.log("ATTEMPTED TO ADD HIGHSCORE, ID: " + Auth.getProfile().data._id + " SCORE: " + newScore);
+  //       addHighscore({
+    //         profileId: Auth.getProfile().data._id,
+    //         newHighscore: newScore
+    //       });
+    // }
+    
+    
+    function MemoryGame() {
+  const [addHighscore] = useMutation(ADD_HIGHSCORE);
   const [state, dispatch] = useGameStore();
 
   useEffect(() => {
@@ -23,6 +37,11 @@ function MemoryGame() {
       dispatch({type: COMPLETE_GAME})
       // setTimeout(() => {
         
+        console.log("ATTEMPTED TO ADD HIGHSCORE, ID: " + Auth.getProfile().data._id + " SCORE: " + state.highScore);
+      addHighscore({
+        profileId: Auth.getProfile().data._id,
+        newHighscore: state.highScore
+      });
       // }, 500);
     }
   }, [dispatch, state.game, state.options, state.moveCount, state.highScore]);

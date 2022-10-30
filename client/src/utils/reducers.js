@@ -15,7 +15,7 @@ export const reducer = (state, { type, payload }) => {
   switch (type) {
     case COMPLETE_GAME: {
       const bestPossible = state.game.length;
-      let multiplier;
+      let multiplier = 5;
 
       if (state.options === 16) {
         multiplier = 5;
@@ -41,6 +41,8 @@ export const reducer = (state, { type, payload }) => {
         localStorage.setItem("memorygamehighscore", json);
       }
 
+      // AddToHighScore(score);
+      // + Auth.getProfile().data._id
       const newGame = window.confirm(
         "You Win!, SCORE: " + score + " New Game?"
       );

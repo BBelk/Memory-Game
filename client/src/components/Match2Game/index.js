@@ -28,6 +28,7 @@ export default function Match2Game() {
         <div>
           {state.options === null ? (
             <>
+            <button onClick={() => dispatch({type: SET_OPTIONS, payload:4})}>Super Easy Test</button>
               <button onClick={() => dispatch({type: SET_OPTIONS, payload:16})}>Easy</button>
               <button onClick={() => dispatch({type: SET_OPTIONS, payload:36})}>Medium</button>
               <button onClick={() => dispatch({type: SET_OPTIONS, payload:64})}>Hard</button>
