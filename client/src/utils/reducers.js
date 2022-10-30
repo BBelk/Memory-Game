@@ -4,6 +4,7 @@ import {
   CREATE_GAME,
   INCREMENT_MOVE_COUNT,
   SET_HIGH_SCORE,
+  SET_LAST_SCORE,
   SET_OPTIONS,
   SHUFFLE_CARDS,
   UPDATE_INDEXES,
@@ -35,9 +36,11 @@ export const reducer = (state, { type, payload }) => {
       }
       let highScore;
 
+      const jsonScore = JSON.stringify(score);
+      localStorage.setItem("memorygamelastscore", jsonScore);
       if (score > state.highScore) {
         highScore = score;
-        const json = JSON.stringify(score);
+        const json = JSON.stringify(highScore);
         localStorage.setItem("memorygamehighscore", json);
       }
 
@@ -61,6 +64,7 @@ export const reducer = (state, { type, payload }) => {
       return {
         ...state,
         highScore,
+        score,
         options,
       };
     }
@@ -110,6 +114,11 @@ export const reducer = (state, { type, payload }) => {
       return {
         ...state,
         highScore: payload,
+      };
+      case SET_LAST_SCORE:
+      return {
+        ...state,
+        score: payload,
       };
     case SHUFFLE_CARDS:
       return {

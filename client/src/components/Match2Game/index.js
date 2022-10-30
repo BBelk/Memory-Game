@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import MemoryGame from "../MemoryGame";
 import { useGameStore } from "../../utils/store";
-import { CREATE_GAME, SET_HIGH_SCORE, SET_OPTIONS } from "../../utils/actions";
+import { CREATE_GAME, SET_HIGH_SCORE, SET_LAST_SCORE, SET_OPTIONS } from "../../utils/actions";
 
 export default function Match2Game() {
   const [state, dispatch] = useGameStore();
@@ -11,6 +11,14 @@ export default function Match2Game() {
     const savedScore = JSON.parse(json);
     if (savedScore) {
       dispatch({type: SET_HIGH_SCORE, payload: savedScore});
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    const json = localStorage.getItem("memorygamelastscore");
+    const savedScore = JSON.parse(json);
+    if (savedScore) {
+      dispatch({type: SET_LAST_SCORE, payload: savedScore});
     }
   }, [dispatch]);
 

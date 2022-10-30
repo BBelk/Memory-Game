@@ -3,6 +3,7 @@ export const CREATE_GAME = 'CREATE_GAME';
 export const INCREMENT_MOVE_COUNT = 'INCREMENT_MOVE_COUNT';
 export const SHUFFLE_CARDS = 'SHUFFLE_CARDS';
 export const SET_HIGH_SCORE = 'SET_HIGH_SCORE';
+export const SET_LAST_SCORE = 'SET_LAST_SCORE';
 export const SET_OPTIONS = 'SET_OPTIONS';
 export const UPDATE_INDEXES = 'UPDATE_INDEXES';
 export const FLIP_CARD = 'FLIP_CARD';
