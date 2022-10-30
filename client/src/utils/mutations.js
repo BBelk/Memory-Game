@@ -35,10 +35,10 @@ export const REMOVE_USER = gql`
 `;
 
 export const ADD_HIGHSCORE = gql`
-  mutation addHighscore($profileId: ID!, $newHighScore: STRING ) {
-    addHighScore(profileId: $profileId, newHighscore: $newHighscore) {
+  mutation addHighscore($profileId: ID!, $newHighscore: String ) {
+    addHighscore(profileId: $profileId, newHighscore: $newHighscore) {
       _id
-      newHighscore
+      highscores
 
     }
   }
