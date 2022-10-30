@@ -18,8 +18,9 @@ import { ADD_HIGHSCORE } from '../../utils/mutations';
     
     
     function MemoryGame() {
-  const [addHighscore] = useMutation(ADD_HIGHSCORE);
+  // const [addHighscore] = useMutation(ADD_HIGHSCORE);
   const [state, dispatch] = useGameStore();
+  const [addHighscore, { error, data }] = useMutation(ADD_HIGHSCORE);
 
   useEffect(() => {
     dispatch({type: CREATE_GAME})
@@ -38,13 +39,25 @@ import { ADD_HIGHSCORE } from '../../utils/mutations';
       // setTimeout(() => {
         
         console.log("ATTEMPTED TO ADD HIGHSCORE, ID: " + Auth.getProfile().data._id + " SCORE: " + state.highScore);
-      addHighscore({
-        profileId: Auth.getProfile().data._id,
-        newHighscore: state.highScore
-      });
+        
+      DoHighscore();
       // }, 500);
     }
   }, [dispatch, state.game, state.options, state.moveCount, state.highScore]);
+
+  const DoHighscore = async() => {
+    try {
+      let scoreString = "" + state.highScore;
+      const { data } = await addHighscore({
+        variables: { profileId: Auth.getProfile().data._id,
+          newHighscore: scoreString},
+      });
+
+      // Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   if (state.game.length === 0) return <div>loading...</div>;
   else {

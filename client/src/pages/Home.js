@@ -31,7 +31,7 @@ const Home = () => {
     <main>
       <div>
         {renderUsername()}
-         <p>{Auth.getProfile().data._id}</p>
+         
       </div>
       <div>
         {renderUserList()}
