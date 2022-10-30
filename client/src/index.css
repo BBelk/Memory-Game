@@ -5,5 +5,7 @@ html, * {
 }
 
 body {
-  background-color: #FFFAE7/*#FFF5E4;#FFCF8E8  */
+  background-color: #FFFAE7;
+  padding-bottom: 70px;
+  /* margin-bottom: 123px; */
 }
