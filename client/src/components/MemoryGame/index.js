@@ -85,11 +85,11 @@ function MemoryGame() {
   else {
     return (
       <div className="row m-5">
-        <div id="cards" className="col-md-3">
+        <div id="cards" className="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-6 col-xxl-4">
           {state.game.map((card, index) => (
             <Card key={index} id={index} color={card.color} />
           ))}
-          <style jsx global>
+          <style>
             {`
                {
                 /* body {
@@ -122,22 +122,13 @@ function MemoryGame() {
               } */
               }
               #cards {
-                // width: 1060px;
                 margin: 0 auto;
-                // display: flex;
-                // flex-wrap: wrap;
-                // position:absolute;
                 display: grid;
                 grid-template-columns: repeat(
                   ${Math.sqrt(state.options)},
                   auto
                 );
-                // grid-template-columns: repeat(auto-fill, auto);
-                // grid-auto-rows: minmax(100px, auto);
-                // width: 25%;
-                // max-width: 50%;
                 grid-gap: 5px;
-                // overflow: hidden;
               }
             `}
           </style>
