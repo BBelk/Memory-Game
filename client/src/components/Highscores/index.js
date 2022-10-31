@@ -9,7 +9,6 @@ const Highscores = ({ highscores }) => {
   return (
     <div className="container">
       <div className="flex-row justify-space-between my-4">
-        <h3>Your HighScores</h3>
         {highscores &&
           highscores.map((highscore) => (
             <div key={highscore} className="col-12 col-xl-6">

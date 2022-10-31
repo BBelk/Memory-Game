@@ -47,7 +47,7 @@ const Header = () => {
                   className="nav-link fs-3"
                   style={{
                     textDecoration: "none",
-                    color: "#FAD6A5",
+                    color: "#FFD372",
                     backgroundColor: "#00ABB3"
                   }}
                   to="/"
