@@ -47,26 +47,11 @@ export const reducer = (state, { type, payload }) => {
 
       // AddToHighScore(score);
       // + Auth.getProfile().data._id
-      const newGame = window.confirm(
-        "You Win!, SCORE: " + score + " New Game?"
-      );
-
-      let options;
-
-      if (newGame) {
-        const gameLength = state.game.length;
-        options = gameLength;
-        // setTimeout(() => {
-        //   options = gameLength
-        // }, 5);
-      } else {
-        options = null;
-      }
+      
       return {
         ...state,
         highScore,
         score,
-        options,
       };
     }
     case CREATE_GAME: {
