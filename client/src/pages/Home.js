@@ -30,11 +30,12 @@ const Home = () => {
   return (
     <main>
       <div>
-        {renderUsername()}
+        {/* {renderUsername()} */}
          
       </div>
       <div>
-        {renderUserList()}
+        {/* {renderUserList()} */}
+        <Match2Game />
       </div>
     </main>
   );

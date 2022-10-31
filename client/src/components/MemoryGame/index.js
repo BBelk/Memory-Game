@@ -35,17 +35,19 @@ import { ADD_HIGHSCORE } from '../../utils/mutations';
   useEffect(() => {
     const finished = !state.game.some((card) => !card.flipped);
     if (finished && state.game.length > 0) {
-      dispatch({type: COMPLETE_GAME})
-      // setTimeout(() => {
+      setTimeout(() => {
+        dispatch({type: COMPLETE_GAME})
+        console.log("COMPLETED GAME");
         
-        console.log("ATTEMPTED TO ADD HIGHSCORE, ID: " + Auth.getProfile().data._id + " SCORE: " + state.score);
+        // console.log("ATTEMPTED TO ADD HIGHSCORE, ID: " + Auth.getProfile().data._id + " SCORE: " + state.score);
         
+      }, 500);
       DoHighscore();
-      // }, 500);
     }
   }, [dispatch, state.game, state.options, state.moveCount, state.highScore, state.score]);
 
   const DoHighscore = async() => {
+    console.log("DOING HIGHSCORE");
     try {
       let scoreString = "" + state.score;
       const { data } = await addHighscore({

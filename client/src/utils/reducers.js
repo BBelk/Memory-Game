@@ -36,6 +36,7 @@ export const reducer = (state, { type, payload }) => {
       }
       let highScore;
 
+      console.log("PART WHERE IT SAVES SCORE TO STATE");
       const jsonScore = JSON.stringify(score);
       localStorage.setItem("memorygamelastscore", jsonScore);
       if (score > state.highScore) {

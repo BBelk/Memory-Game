@@ -7,7 +7,7 @@ const Header = () => {
     <header>
       <nav
         className="mb-4 navbar navbar-expand-lg"
-        style={{ height: 120, backgroundColor: "#00ABB3" }}
+        style={{ height: 90, backgroundColor: "#00ABB3" }}
       >
         <div className="container-fluid justify-content-lg-between justify-content-sm-between">
           <Link
