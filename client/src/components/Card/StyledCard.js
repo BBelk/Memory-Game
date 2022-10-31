@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useGameStore } from "../../utils/store";
 
 const StyledCard = styled.div`
   .card {

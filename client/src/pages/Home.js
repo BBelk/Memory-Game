@@ -1,12 +1,11 @@
 // Node Modules
-import React from 'react';
-import { useQuery } from '@apollo/client';
+import React from "react";
+import { useQuery } from "@apollo/client";
 // Utilities
-import Auth from '../utils/auth';
-import { QUERY_USERS } from '../utils/queries';
+import Auth from "../utils/auth";
+import { QUERY_USERS } from "../utils/queries";
 // Components
-import UserList from '../components/UserList';
-import Match2Game from '../components/Match2Game';
+import Match2Game from "../components/Match2Game";
 
 const Home = () => {
   const { loading, data } = useQuery(QUERY_USERS);
@@ -14,25 +13,22 @@ const Home = () => {
 
   const renderUserList = () => {
     if (loading) {
-      return <h2>Loading...</h2>
+      return <h2>Loading...</h2>;
     } else {
       // return <UserList users={users} title="List of Users" />
-      return <Match2Game />
+      return <Match2Game />;
     }
-  } 
+  };
 
   const renderUsername = () => {
     if (!Auth.loggedIn()) return null;
     // console.log("USER STUFF HERE ", Auth.getProfile().data);
     return Auth.getProfile().data.username;
-  }
+  };
 
   return (
     <main>
-      <div>
-        {/* {renderUsername()} */}
-         
-      </div>
+      <div>{/* {renderUsername()} */}</div>
       <div>
         {/* {renderUserList()} */}
         <Match2Game />

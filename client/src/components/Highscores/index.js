@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Highscores = ({ highscores }) => {
   console.log("HIGHSCORES ARE HERE: ", highscores);
@@ -7,22 +7,20 @@ const Highscores = ({ highscores }) => {
   }
 
   let newArray = [];
-  highscores.map((highscore) => (
-    newArray.push(Math.floor(highscore))
-  ));  
+  highscores.map((highscore) => newArray.push(Math.floor(highscore)));
   newArray.sort((a, b) => a - b);
   newArray.reverse();
   newArray.length = 5;
-  
+
   return (
     <div className="container">
       <div className="flex-row justify-space-between my-4">
         {newArray &&
-          newArray.map((highscore) => (
-            <div key={highscore} className="col-12 col-xl-6">
+          newArray.map((highscore, index) => (
+            <div key={highscore} className="col-12">
               <div className="card mb-3">
                 <h4 className="card-header bg-dark text-light p-2 m-0">
-                  {highscore} <br />
+                  #{index + 1}: {highscore}
                 </h4>
               </div>
             </div>
@@ -32,4 +30,4 @@ const Highscores = ({ highscores }) => {
   );
 };
 
-export default Highscores
+export default Highscores;

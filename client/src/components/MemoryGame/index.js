@@ -2,73 +2,90 @@ import { useEffect } from "react";
 
 import Card from "../Card";
 import { useGameStore } from "../../utils/store";
-import { COMPLETE_GAME, CREATE_GAME, SET_OPTIONS, VERIFY_MATCH } from "../../utils/actions";
-import Auth from '../../utils/auth';
-import { useMutation } from '@apollo/client';
-import { ADD_HIGHSCORE } from '../../utils/mutations';
+import {
+  COMPLETE_GAME,
+  CREATE_GAME,
+  SET_OPTIONS,
+  VERIFY_MATCH,
+} from "../../utils/actions";
+import Auth from "../../utils/auth";
+import { useMutation } from "@apollo/client";
+import { ADD_HIGHSCORE } from "../../utils/mutations";
 
 // const AddToHighScore = async (newScore) => {
-  //       // add score
-  //       console.log("ATTEMPTED TO ADD HIGHSCORE, ID: " + Auth.getProfile().data._id + " SCORE: " + newScore);
-  //       addHighscore({
-    //         profileId: Auth.getProfile().data._id,
-    //         newHighscore: newScore
-    //       });
-    // }
-    
-    
-    function MemoryGame() {
+//       // add score
+//       console.log("ATTEMPTED TO ADD HIGHSCORE, ID: " + Auth.getProfile().data._id + " SCORE: " + newScore);
+//       addHighscore({
+//         profileId: Auth.getProfile().data._id,
+//         newHighscore: newScore
+//       });
+// }
+
+function MemoryGame() {
   // const [addHighscore] = useMutation(ADD_HIGHSCORE);
   const [state, dispatch] = useGameStore();
   const [addHighscore, { error, data }] = useMutation(ADD_HIGHSCORE);
 
   useEffect(() => {
-    dispatch({type: CREATE_GAME})
+    dispatch({ type: CREATE_GAME });
   }, [dispatch]);
 
-  useEffect(() => { 
+  useEffect(() => {
     if (state.flippedIndexes.length === 2) {
-      dispatch({type: VERIFY_MATCH})
+      dispatch({ type: VERIFY_MATCH });
     }
   }, [dispatch, state.flippedIndexes.length]);
 
   useEffect(() => {
     const finished = !state.game.some((card) => !card.flipped);
-    if (finished && state.game.length > 0) {
-      setTimeout(() => {
-        dispatch({type: COMPLETE_GAME})
-        console.log("COMPLETED GAME");
-        
-        // console.log("ATTEMPTED TO ADD HIGHSCORE, ID: " + Auth.getProfile().data._id + " SCORE: " + state.score);
-        
-      }, 500);
-      DoHighscore();
-      const newGame = window.confirm(
-        "You Win!, SCORE: " + state.score + " New Game?"
-      );
+    const DoHighscore = async () => {
+      console.log("DOING HIGHSCORE");
+      try {
+        let scoreString = "" + state.score;
+        const { data } = await addHighscore({
+          variables: {
+            profileId: Auth.getProfile().data._id,
+            newHighscore: scoreString,
+          },
+        });
 
-      if (newGame) {
-        dispatch({type:  CREATE_GAME})
-      } else {
-        dispatch({type: SET_OPTIONS, payload: null})
+        // Auth.login(data.login.token);
+      } catch (e) {
+        console.error(e);
       }
-    }
-  }, [dispatch, state.game, state.options, state.moveCount, state.highScore, state.score]);
+    };
 
-  const DoHighscore = async() => {
-    console.log("DOING HIGHSCORE");
-    try {
-      let scoreString = "" + state.score;
-      const { data } = await addHighscore({
-        variables: { profileId: Auth.getProfile().data._id,
-          newHighscore: scoreString},
-      });
+    if (finished && state.game.length > 0) {
+      if (Auth.loggedIn()) {
+        DoHighscore();
+      }
+      setTimeout(() => {
+        dispatch({ type: COMPLETE_GAME });
+        console.log("COMPLETED GAME");
 
-      // Auth.login(data.login.token);
-    } catch (e) {
-      console.error(e);
+        // console.log("ATTEMPTED TO ADD HIGHSCORE, ID: " + Auth.getProfile().data._id + " SCORE: " + state.score);
+      }, 300);
+      setTimeout(() => {
+        const newGame = window.confirm(
+          "You Win!, SCORE: " + state.score + " New Game?"
+        );
+
+        if (newGame) {
+          dispatch({ type: CREATE_GAME });
+        } else {
+          dispatch({ type: SET_OPTIONS, payload: null });
+        }
+      }, 400);
     }
-  }
+  }, [
+    dispatch,
+    state.game,
+    state.options,
+    state.moveCount,
+    state.highScore,
+    state.score,
+    addHighscore,
+  ]);
 
   if (state.game.length === 0) return <div>loading...</div>;
   else {
@@ -76,15 +93,12 @@ import { ADD_HIGHSCORE } from '../../utils/mutations';
       <div className="row m-5">
         <div id="cards" className="col-md-3">
           {state.game.map((card, index) => (
-            <Card
-              key={index}
-              id={index}
-              color={card.color}
-            />
+            <Card key={index} id={index} color={card.color} />
           ))}
           <style jsx global>
             {`
-              {/* body {
+               {
+                /* body {
                 text-align: center;
                 font-family: -apple-system, sans-serif;
               }
@@ -111,7 +125,8 @@ import { ADD_HIGHSCORE } from '../../utils/mutations';
               }
               button:focus {
                 outline: 0;
-              } */}
+              } */
+              }
               #cards {
                 // width: 1060px;
                 margin: 0 auto;
@@ -119,7 +134,10 @@ import { ADD_HIGHSCORE } from '../../utils/mutations';
                 // flex-wrap: wrap;
                 // position:absolute;
                 display: grid;
-                grid-template-columns: repeat(${Math.sqrt(state.options)}, auto);
+                grid-template-columns: repeat(
+                  ${Math.sqrt(state.options)},
+                  auto
+                );
                 // grid-template-columns: repeat(auto-fill, auto);
                 // grid-auto-rows: minmax(100px, auto);
                 // width: 25%;
