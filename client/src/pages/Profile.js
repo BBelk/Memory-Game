@@ -63,6 +63,8 @@ const Profile = () => {
           <p style={{fontSize: 22, color: "#FAD6A5"}}>{user.username}</p>
           <li style={{fontSize: 22, color: "#FAD6A5"}}>EMAIL</li>
           <p style={{fontSize: 22, color: "#FAD6A5"}}>{user.email}</p>
+          <li style={{fontSize: 22, color: "#FAD6A5"}}>HIGHSCORES</li>
+          <p style={{fontSize: 22, color: "#FAD6A5"}}>{user.highscores?.length > 0 && <Highscores highscores={user.highscores} />}</p>
          
           {/* linear-gradient(0deg, rgba(5,221,224,1) 20%, rgba(253,187,45,1) 95%) #062C30*/}
           
@@ -82,7 +84,7 @@ const Profile = () => {
         </h2>
         {renderCurrentUserInfo()}
         {/* {renderUserList()} */}
-        {user.highscores?.length > 0 && <Highscores highscores={user.highscores} />}
+        {/* {user.highscores?.length > 0 && <Highscores highscores={user.highscores} />} */}
       </div>
     </div>
   );
