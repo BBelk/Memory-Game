@@ -41,12 +41,10 @@ export default function Match2Game() {
             <>
               <button
                 onClick={() => {
-                  // const prevOptions = state.options;
-                  dispatch({type: CREATE_GAME});
-                  // dispatch({type:SET_OPTIONS, payload: prevOptions});
-                  // setTimeout(() => {
+                  setTimeout(() => {
+                    dispatch({type: CREATE_GAME});
                     
-                  // }, 5);
+                  }, 5);
                 }}
               >
                 Start Over

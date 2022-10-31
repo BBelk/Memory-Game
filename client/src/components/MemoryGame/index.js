@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import Card from "../Card";
 import { useGameStore } from "../../utils/store";
-import { COMPLETE_GAME, CREATE_GAME, VERIFY_MATCH } from "../../utils/actions";
+import { COMPLETE_GAME, CREATE_GAME, SET_OPTIONS, VERIFY_MATCH } from "../../utils/actions";
 import Auth from '../../utils/auth';
 import { useMutation } from '@apollo/client';
 import { ADD_HIGHSCORE } from '../../utils/mutations';
@@ -43,6 +43,15 @@ import { ADD_HIGHSCORE } from '../../utils/mutations';
         
       }, 500);
       DoHighscore();
+      const newGame = window.confirm(
+        "You Win!, SCORE: " + state.score + " New Game?"
+      );
+
+      if (newGame) {
+        dispatch({type:  CREATE_GAME})
+      } else {
+        dispatch({type: SET_OPTIONS, payload: null})
+      }
     }
   }, [dispatch, state.game, state.options, state.moveCount, state.highScore, state.score]);
 
