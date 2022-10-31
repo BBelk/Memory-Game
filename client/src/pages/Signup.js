@@ -77,7 +77,7 @@ const Signup = () => {
   };
 
   return (
-    <main>
+    <main className="min-vh-100">
       <h4>Sign Up</h4>
       <div>
         {renderForm()}
