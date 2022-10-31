@@ -27,7 +27,7 @@ const Home = () => {
   };
 
   return (
-    <main>
+    <main className="min-vh-100">
       <div>{/* {renderUsername()} */}</div>
       <div>
         {/* {renderUserList()} */}
