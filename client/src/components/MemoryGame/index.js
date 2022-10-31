@@ -42,50 +42,44 @@ function MemoryGame() {
       console.log("DOING HIGHSCORE");
       try {
         let scoreString = "" + state.score;
-        const { data } = await addHighscore({
-          variables: {
-            profileId: Auth.getProfile().data._id,
-            newHighscore: scoreString,
-          },
-        });
+        if (Auth.loggedIn()) {
+          const { data } = await addHighscore({
+            variables: {
+              profileId: Auth.getProfile().data._id,
+              newHighscore: scoreString,
+            },
+          });
+        }
+        dispatch({ type: COMPLETE_GAME });
+        console.log("COMPLETED GAME");
 
+        const newGame = window.confirm(
+          "You Win!, SCORE: " + state.score + " New Game?"
+        );
         // Auth.login(data.login.token);
       } catch (e) {
         console.error(e);
       }
     };
 
-    if (finished && state.game.length > 0) {
-      if (Auth.loggedIn()) {
-        DoHighscore();
-      }
-      setTimeout(() => {
-        dispatch({ type: COMPLETE_GAME });
-        console.log("COMPLETED GAME");
+    if (finished && state.game.length > 0 && state.inProgress) {
+     
+      DoHighscore();
+      // setTimeout(() => {
 
-        // console.log("ATTEMPTED TO ADD HIGHSCORE, ID: " + Auth.getProfile().data._id + " SCORE: " + state.score);
-      }, 300);
-      setTimeout(() => {
-        const newGame = window.confirm(
-          "You Win!, SCORE: " + state.score + " New Game?"
-        );
+      //   // console.log("ATTEMPTED TO ADD HIGHSCORE, ID: " + Auth.getProfile().data._id + " SCORE: " + state.score);
+      // }, 300);
+      // setTimeout(() => {
+      //
 
-        if (newGame) {
-          dispatch({ type: CREATE_GAME });
-        } else {
-          dispatch({ type: SET_OPTIONS, payload: null });
-        }
-      }, 400);
+      //   if (newGame) {
+      //     dispatch({ type: CREATE_GAME });
+      //   } else {
+      //     dispatch({ type: SET_OPTIONS, payload: null });
+      //   }
+      // }, 400);
     }
-  }, [
-    dispatch,
-    state.game,
-    state.options,
-    state.moveCount,
-    state.highScore,
-    state.score,
-    addHighscore,
-  ]);
+  }, [dispatch, state.game, state.options]);
 
   if (state.game.length === 0) return <div>loading...</div>;
   else {

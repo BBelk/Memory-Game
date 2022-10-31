@@ -14,6 +14,7 @@ export default function StoreProvider(props) {
     highScore: 0,
     score: 0,
     options: null,
+    inProgress: false,
     lastItemMoved: -1
   });
   return <Provider value={reducer} {...props} />
