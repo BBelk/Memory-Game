@@ -25,10 +25,6 @@ export default function Match2Game() {
   return (
     <div>
       <div className="container">
-        <h1>
-          Memory Game
-          <br />
-        </h1>
         <div>
           High Score: {state.highScore}
           <br />
