@@ -52,6 +52,7 @@ export const reducer = (state, { type, payload }) => {
         ...state,
         highScore,
         score,
+        inProgress: false
       };
     }
     case CREATE_GAME: {
@@ -78,7 +79,7 @@ export const reducer = (state, { type, payload }) => {
       }
 
       const game = newGame.sort(() => Math.random() - 0.5);
-      return { ...state, game };
+      return { ...state, game, inProgress: true };
     }
     case INCREMENT_MOVE_COUNT:
       return {
