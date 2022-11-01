@@ -1,28 +1,26 @@
-html, * {
+html,
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  background-color: #FFFAE7;
-  /* margin-bottom: 100px; */
+  background-color: #fffae7;
+  text-align: center;
+  font-family: -apple-system, sans-serif;
+  margin-bottom: 100px;
   /* min-height: 100vh; */
 }
 
-body {
-  text-align: center;
-  font-family: -apple-system, sans-serif;
-}
 .container {
   margin: 0 auto;
-  /* display: flex; didnt need this */
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 button {
-  background: #00ABB3;
+  background: #00abb3;
   border-radius: 4px;
   font-weight: 700;
   color: #fff;
@@ -37,18 +35,3 @@ button:hover {
 button:focus {
   outline: 0;
 }
-/* #cards {
-  // width: 1060px;
-  margin: 0 auto;
-  // display: flex;
-  // flex-wrap: wrap;
-  // position:absolute;
-  display: grid;
-  grid-template-columns: repeat(${Math.sqrt(state.options)}, auto);
-  // grid-template-columns: repeat(auto-fill, auto);
-  // grid-auto-rows: minmax(100px, auto);
-  // width: 25%;
-  // max-width: 50%;
-  grid-gap: 5px;
-  // overflow: hidden;
-} */

@@ -12,15 +12,6 @@ import Auth from "../../utils/auth";
 import { useMutation } from "@apollo/client";
 import { ADD_HIGHSCORE } from "../../utils/mutations";
 
-// const AddToHighScore = async (newScore) => {
-//       // add score
-//       console.log("ATTEMPTED TO ADD HIGHSCORE, ID: " + Auth.getProfile().data._id + " SCORE: " + newScore);
-//       addHighscore({
-//         profileId: Auth.getProfile().data._id,
-//         newHighscore: newScore
-//       });
-// }
-
 function MemoryGame() {
   // const [addHighscore] = useMutation(ADD_HIGHSCORE);
   const [state, dispatch] = useGameStore();
@@ -56,14 +47,12 @@ function MemoryGame() {
         const newGame = window.confirm(
           "You Win!, SCORE: " + state.score + " New Game?"
         );
-        // Auth.login(data.login.token);
       } catch (e) {
         console.error(e);
       }
     };
 
     if (finished && state.game.length > 0 && state.inProgress) {
-     
       DoHighscore();
       // setTimeout(() => {
 
@@ -84,43 +73,16 @@ function MemoryGame() {
   if (state.game.length === 0) return <div>loading...</div>;
   else {
     return (
-      <div className="row m-5">
-        <div id="cards" className="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-6 col-xxl-4">
+      <div className="row mt-2 m-5">
+        <div
+          id="cards"
+          className="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-6 col-xxl-4"
+        >
           {state.game.map((card, index) => (
             <Card key={index} id={index} color={card.color} />
           ))}
           <style>
             {`
-               {
-                /* body {
-                text-align: center;
-                font-family: -apple-system, sans-serif;
-              }
-              .container {
-                // width: 1060px;
-                margin: 0 auto;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 20px;
-              }
-              button {
-                background: #00ad9f;
-                border-radius: 4px;
-                font-weight: 700;
-                color: #fff;
-                border: none;
-                padding: 7px 15px;
-                margin-left: 8px;
-                cursor: pointer;
-              }
-              button:hover {
-                background: #008378;
-              }
-              button:focus {
-                outline: 0;
-              } */
-              }
               #cards {
                 margin: 0 auto;
                 display: grid;

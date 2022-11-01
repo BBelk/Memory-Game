@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../utils/mutations';
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from "../utils/mutations";
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
 const Signup = () => {
   const [formState, setFormState] = useState({
-    username: '',
-    email: '',
-    password: '',
+    username: "",
+    email: "",
+    password: "",
   });
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
@@ -40,12 +40,11 @@ const Signup = () => {
   const renderForm = () => {
     if (data) {
       return (
-      <p>
-        Success! You may now head{' '}
-        <Link to="/">back to the homepage.</Link>
-      </p>
-      )
-    } 
+        <p>
+          Success! You may now head <Link to="/">back to the homepage.</Link>
+        </p>
+      );
+    }
     return (
       <form className="form" onSubmit={handleFormSubmit}>
         <div className="form-group mb-2">
@@ -66,7 +65,7 @@ const Signup = () => {
             type="email"
             value={formState.email}
             onChange={handleChange}
-          /> 
+          />
         </div>
         <div className="form-group mb-2">
           <input
@@ -77,19 +76,19 @@ const Signup = () => {
             value={formState.password}
             onChange={handleChange}
           />
-          <div className="form-text">Password must be at least five characters long!</div>
+          <div className="form-text">
+            Password must be at least five characters long!
+          </div>
         </div>
         <div className="form-group">
-          <button type="submit">
-            Sign Up
-          </button>
+          <button type="submit">Sign Up</button>
         </div>
       </form>
     );
   };
 
   return (
-    <main className="min-vh-100">
+    <main>
       <h4>Sign Up</h4>
       <div>
         {renderForm()}
