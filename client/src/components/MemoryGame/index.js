@@ -29,46 +29,35 @@ function MemoryGame() {
 
   useEffect(() => {
     const finished = !state.game.some((card) => !card.flipped);
-    const DoHighscore = async () => {
-      console.log("DOING HIGHSCORE");
-      try {
-        let scoreString = "" + state.score;
-        if (Auth.loggedIn()) {
-          const { data } = await addHighscore({
-            variables: {
-              profileId: Auth.getProfile().data._id,
-              newHighscore: scoreString,
-            },
-          });
+    console.log("FINISHED", finished);
+    console.log("LENGTH", state.game.length);
+    if (state.game.length && finished && !state.inProgress && state.moveCount) {
+      const doHighscore = async () => {
+        try {
+          let scoreString = "" + state.score;
+          if (Auth.loggedIn()) {
+            const { data } = await addHighscore({
+              variables: {
+                profileId: Auth.getProfile().data._id,
+                newHighscore: scoreString,
+              },
+            });
+          }
+
+          const playNewGame = window.confirm(
+            "You Win!, SCORE: " + scoreString + " New Game?"
+          );
+
+          playNewGame
+            ? dispatch({ type: CREATE_GAME })
+            : dispatch({ type: SET_OPTIONS, payload: null });
+        } catch (e) {
+          console.error(e);
         }
-        dispatch({ type: COMPLETE_GAME });
-        console.log("COMPLETED GAME");
-
-        const newGame = window.confirm(
-          "You Win!, SCORE: " + state.score + " New Game?"
-        );
-      } catch (e) {
-        console.error(e);
-      }
-    };
-
-    if (finished && state.game.length > 0 && state.inProgress) {
-      DoHighscore();
-      // setTimeout(() => {
-
-      //   // console.log("ATTEMPTED TO ADD HIGHSCORE, ID: " + Auth.getProfile().data._id + " SCORE: " + state.score);
-      // }, 300);
-      // setTimeout(() => {
-      //
-
-      //   if (newGame) {
-      //     dispatch({ type: CREATE_GAME });
-      //   } else {
-      //     dispatch({ type: SET_OPTIONS, payload: null });
-      //   }
-      // }, 400);
+      };
+      doHighscore();
     }
-  }, [dispatch, state.game, state.options]);
+  }, [dispatch, state.score]);
 
   if (state.game.length === 0) return <div>loading...</div>;
   else {

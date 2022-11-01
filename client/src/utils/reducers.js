@@ -45,14 +45,11 @@ export const reducer = (state, { type, payload }) => {
         localStorage.setItem("memorygamehighscore", json);
       }
 
-      // AddToHighScore(score);
-      // + Auth.getProfile().data._id
-      
       return {
         ...state,
         highScore,
         score,
-        inProgress: false
+        inProgress: false,
       };
     }
     case CREATE_GAME: {
@@ -84,8 +81,11 @@ export const reducer = (state, { type, payload }) => {
     case INCREMENT_MOVE_COUNT:
       return {
         ...state,
-        moveCount: state.lastItemMoved !== payload ? state.moveCount + 1 : state.moveCount,
-        lastItemMoved: payload
+        moveCount:
+          state.lastItemMoved !== payload
+            ? state.moveCount + 1
+            : state.moveCount,
+        lastItemMoved: payload,
       };
     case FLIP_CARD:
       const cards = [...state.game];
@@ -102,7 +102,7 @@ export const reducer = (state, { type, payload }) => {
         ...state,
         highScore: payload,
       };
-      case SET_LAST_SCORE:
+    case SET_LAST_SCORE:
       return {
         ...state,
         score: payload,
@@ -124,13 +124,12 @@ export const reducer = (state, { type, payload }) => {
     case VERIFY_MATCH: {
       let newIndexes;
       let newGame;
-     
+
       const match =
         state.game[state.flippedIndexes[0]].colorId ===
         state.game[state.flippedIndexes[1]].colorId;
 
-        
-        if (match) {
+      if (match) {
         newGame = [...state.game];
         newGame[state.flippedIndexes[0]].flipped = true;
         newGame[state.flippedIndexes[1]].flipped = true;
