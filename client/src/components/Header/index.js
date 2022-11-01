@@ -28,7 +28,7 @@ const Header = () => {
             aria-controls="navbarNavDropdown"
             aria-expanded="false"
             aria-label="Toggle navigation"
-            style={{backgroundColor: "#FAD6A5",}}
+            style={{ backgroundColor: "#FAD6A5" }}
           >
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -38,17 +38,13 @@ const Header = () => {
             stye={{ backgroundColor: "#00ABB3" }}
           >
             <ul className="navbar-nav me-auto my-2 my-lg-0">
-              {/* <li className="nav-item">
-                <a className="nav-link active" style={{ color: "#FAD6A5", fontSize: 25, borderRight: "1px solid #F0EBCE"}} aria-current="page" href="#">User's Profile</a>
-              </li> */}
-
               <li className="nav-item">
                 <Link
                   className="nav-link fs-3"
                   style={{
                     textDecoration: "none",
                     color: "#FFD372",
-                    backgroundColor: "#00ABB3"
+                    backgroundColor: "#00ABB3",
                   }}
                   to="/"
                 >
@@ -60,9 +56,6 @@ const Header = () => {
           </div>
         </div>
       </nav>
-      {/* <div>
-        <p>Simple App to View Users.</p>
-      </div> */}
     </header>
   );
 };

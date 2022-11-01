@@ -77,7 +77,7 @@ const Login = () => {
   };
 
   return (
-    <main className="min-vh-100">
+    <main>
       <h4>Login</h4>
       <div>
         {renderForm()}

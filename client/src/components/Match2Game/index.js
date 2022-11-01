@@ -1,14 +1,22 @@
 import React, { useEffect } from "react";
 import MemoryGame from "../MemoryGame";
 import { useGameStore } from "../../utils/store";
+import Auth from "../../utils/auth";
 import {
   CREATE_GAME,
   SET_HIGH_SCORE,
   SET_LAST_SCORE,
   SET_OPTIONS,
 } from "../../utils/actions";
+import { offsetLimitPagination } from "@apollo/client/utilities";
+import { ADD_THOUGHT } from "../../utils/mutations";
 
 export default function Match2Game() {
+  const renderHighScore = () => {
+    if (!Auth.loggedIn()) return null;
+    return <div>high score: {state.highScore}</div>;
+  };
+
   const [state, dispatch] = useGameStore();
 
   useEffect(() => {
@@ -30,10 +38,7 @@ export default function Match2Game() {
   return (
     <div>
       <div className="container">
-        <div>
-          High Score: {state.highScore}
-          <br />
-        </div>
+        {renderHighScore()}
         <div>
           {state.options === null ? (
             <>
@@ -76,7 +81,6 @@ export default function Match2Game() {
           )}
         </div>
       </div>
-
       {state.options ? <MemoryGame /> : <h2>Choose a difficulty to begin!</h2>}
     </div>
   );

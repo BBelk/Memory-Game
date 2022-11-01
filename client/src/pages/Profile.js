@@ -68,9 +68,7 @@ const Profile = () => {
             <li style={{ fontSize: 22, color: "#FAD6A5" }}>
               USERNAME: {user.username} | EMAIL: {user.email}
             </li>
-            {/* <p style={{fontSize: 22, color: "#FAD6A5"}}>{user.username}</p> */}
-            {/* <li style={{fontSize: 22, color: "#FAD6A5"}}>EMAIL: {user.email}</li> */}
-            {/* <p style={{fontSize: 22, color: "#FAD6A5"}}>{user.email}</p> */}
+
             <li style={{ fontSize: 22, color: "#FAD6A5" }}>
               HIGHSCORES
               <p style={{ fontSize: 22, color: "#FAD6A5" }}>
@@ -87,7 +85,7 @@ const Profile = () => {
   };
 
   return (
-    <div>
+    <main>
       <div className="mt-4">
         <h2 className="text-center" style={{ color: "#874e16" }}>
           Viewing {id ? `${user.username}'s` : "your"} profile.
@@ -96,7 +94,7 @@ const Profile = () => {
         {/* {renderUserList()} */}
         {/* {user.highscores?.length > 0 && <Highscores highscores={user.highscores} />} */}
       </div>
-    </div>
+    </main>
   );
 };
 
