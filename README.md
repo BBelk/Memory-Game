@@ -9,8 +9,8 @@
 
 ## Description
 
-Boilerplate code to setup a MERN Apollo Server/Client Application using a Mongo database
-Test3
+This app is a  simple matching card game to occupy your time - using react as a single page application with a stylized layout. The main focus was to build a globally state managed matching game using the MERN stack.
+
 
 ## Technologies
 
@@ -25,7 +25,7 @@ Test3
 
 ## Visuals
 
-![Screenshot]()
+![Screenshot](./assets/screenshot.png)
 
 ## Application
 
