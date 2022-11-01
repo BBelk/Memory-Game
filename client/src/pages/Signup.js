@@ -47,31 +47,43 @@ const Signup = () => {
       )
     } 
     return (
-      <form onSubmit={handleFormSubmit}>
-        <input
-          placeholder="Your username"
-          name="username"
-          type="text"
-          value={formState.name}
-          onChange={handleChange}
-        />
-        <input
-          placeholder="Your email"
-          name="email"
-          type="email"
-          value={formState.email}
-          onChange={handleChange}
-        />
-        <input
-          placeholder="******"
-          name="password"
-          type="password"
-          value={formState.password}
-          onChange={handleChange}
-        />
-        <button type="submit">
-          Submit
-        </button>
+      <form className="form" onSubmit={handleFormSubmit}>
+        <div className="form-group mb-2">
+          <input
+            className="form-input"
+            placeholder="Your username"
+            name="username"
+            type="text"
+            value={formState.name}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group mb-2">
+          <input
+            className="form-input"
+            placeholder="Your email"
+            name="email"
+            type="email"
+            value={formState.email}
+            onChange={handleChange}
+          /> 
+        </div>
+        <div className="form-group mb-2">
+          <input
+            className="form-input"
+            placeholder="******"
+            name="password"
+            type="password"
+            value={formState.password}
+            onChange={handleChange}
+          />
+          <div className="form-text">Password must be at least five characters long!</div>
+        </div>
+        <div className="form-group">
+          <button type="submit">
+            Sign Up
+          </button>
+        </div>
       </form>
     );
   };
